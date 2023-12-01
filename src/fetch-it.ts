@@ -7,11 +7,13 @@ export async function fetchIt<T>(
 	method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH",
 	url: string,
 	params: { [k: string]: any } | undefined = undefined,
-) {
+	signal: AbortSignal | null = null,
+): Promise<HttpResponse<T>> {
 	let config: any = {
 		method,
 		mode: "cors",
 		headers: {},
+		signal,
 	}
 
 	if (this._plusToken) {

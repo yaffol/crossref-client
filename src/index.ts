@@ -24,6 +24,37 @@ export class CrossrefClient {
 
 	protected _fetch = fetchIt
 
+	// AbortController instance to manage cancellation of API requests
+	private abortController: AbortController | null = null;
+
+	/**
+	 * Returns the current AbortSignal object to be passed to fetch requests.
+	 * This allows external control over request cancellation.
+	 * @returns {AbortSignal | null} The current AbortSignal or null if none.
+	 */
+	public getAbortSignal(): AbortSignal | null {
+		return this.abortController?.signal || null;
+	}
+
+	/**
+	 * Initiates a new AbortController instance.
+	 * This should be called before starting a new request that needs to be cancellable.
+	 */
+	public initializeAbortController() {
+		this.abortController = new AbortController();
+	}
+
+	/**
+	 * Aborts the current API request and resets the AbortController.
+	 * This method should be called to cancel an ongoing request.
+	 */
+	public abortRequest() {
+		if (this.abortController) {
+			this.abortController.abort();
+			this.abortController = null;
+		}
+	}
+
 	// funders
 	public funders = Funders.funders
 	public funder = Funders.funder

@@ -16,7 +16,9 @@ export async function journals(
 ) {
 	const url = `${this._url}/journals`
 	let params: SearchQueryParams = { query, rows, offset }
-	return this._fetch<Items<Journal>>("GET", url, params)
+
+	// Using the AbortSignal to enable request cancellation
+	return this._fetch<Items<Journal>>("GET", url, params, this.getAbortSignal())
 }
 
 export async function journal(this: CrossrefClient, issn: string) {

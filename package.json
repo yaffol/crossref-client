@@ -1,7 +1,7 @@
 {
 	"$schema": "https://json.schemastore.org/package.json",
-	"name": "@jamesgopsill/crossref-client",
-	"version": "1.0.1",
+	"name": "@pvale/crossref-client",
+	"version": "1.0.2",
 	"description": "A Typescript client for the Crossref API.",
 	"keywords": [
 		"Crossref"
@@ -41,7 +41,8 @@
 		"format": "prettier --write .",
 		"example:ts": "node --loader tsx --trace-warnings --no-warnings examples/ts/query-works.ts",
 		"example:mjs": "node examples/mjs/query-works.mjs",
-		"example:cjs": "node examples/cjs/query-works.cjs"
+		"example:cjs": "node examples/cjs/query-works.cjs",
+		"prepare": "npm run build:dist"
 	},
 	"devDependencies": {
 		"@types/node": "^20.4.4",
